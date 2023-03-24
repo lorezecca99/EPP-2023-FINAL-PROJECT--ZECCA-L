@@ -71,7 +71,7 @@ def SS(data):
         tolk=1e-4
         tollab=1e-4
 
-        nq=2                                # Max number of iterations
+        nq=40                                # Max number of iterations
         q=0                                  # Counter for iterations
 
         k1=k0+10

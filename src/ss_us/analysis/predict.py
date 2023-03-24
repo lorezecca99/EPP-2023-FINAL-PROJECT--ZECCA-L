@@ -7,6 +7,8 @@ from sklearn.linear_model import LinearRegression
 
 
 def predict_eff(data):
+    """Fit a quadratic polynomial function of age to the household’s log hourly wage, by
+    education to predict the age-efficiency profile of US workers between 2014 and 2018."""
     # Generate some sample data
     X = data[['age','age2','col']]
     y = data['lwage']
@@ -15,12 +17,6 @@ def predict_eff(data):
     # Create a LinearRegression object and fit the model using the weighted data
     lr = LinearRegression()
     lr.fit(X, y, sample_weight=weights)
-
-    # Print the coefficients of the linear model
-    #print(lr.coef_)
-
-    # Perform regression
-    #model = sm.WLS.from_formula('lwage ~ age + age2 + col', weights=data['hhwgt'], data=data).fit()
 
     # Predict fitted values and residuals
     data['lwage_fit'] = lr.predict(X)
@@ -43,13 +39,16 @@ def predict_eff(data):
     data = data.sort_values(['col', 'age'])
     data = data.pivot(index='age', columns='col', values='wage_fit_norm')
 
+    """For the sake of simplicity, let us take the average between the two types of workers. 
+    Later on, we will once again, distinguish tho types of workers but following the approach 
+    adopted by Conesa and Krueger (1999)."""
     data['average_eff'] = (data[0] + data[1]) / 2
-    #data[['average_eff']].to_csv('eff_profiles_py.txt', sep=' ', header=False)
 
     return data
 print('Age-efficiency estimated')
 
 def predict_eff_age(data):
+    """Function to plot the age-efficiency profile."""
     #data = data.pivot(index=data[]'age', columns='col', values='wage_fit_norm')
     plt.figure(1)
     plt.plot(data.index, data['average_eff'])
