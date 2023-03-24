@@ -3,6 +3,16 @@ import matplotlib.pyplot as plt
 
 #Set up experiment
 def SS(data):
+    """ The function, and the project as a whole, replicates the work 
+    from Conesa and Krueger (1999) and assesses a social security reform.
+    We consider a discrete time overlapping generations model, 
+    where the economy is populated by a continuum with given mass 
+    growing at a constant rate "n" of ex-ante identical individuals.
+    The function computes the two steady states: 
+    one in which the government runs a social security system, financed 
+    through taxes on labor; and another one, where the there is no public 
+    pension system, and eranings from labor are not taxed. """
+
     def Reform(R):
         if  R== 0:
             tau = 0.11
@@ -22,11 +32,11 @@ def SS(data):
     tR = J - JR + 1               # length of retirement
     tW = JR - 1                   # length of working life
     n = 0.012                     # Population growth
-    z = [3.0, 0.5]
+    z = [3.0, 0.5]                # Labor efficiency unit
     # Preferences
     beta = 0.97                   # discount factor
     sigma = 2                     # coefficient of relative risk aversion
-    gamma = 0.42
+    gamma = 0.42                  # weight on consumption
 
     # Production
     alpha = 0.36                  # production elasticity of capital
@@ -41,7 +51,7 @@ def SS(data):
     # Distribution of newborns over shocks
     z_init = np.array([0.2037, 0.7963])
 
-    # Transition matrix
+    # Transition matrix 
     tran = np.zeros((2, 2))
     tran[0, 0] = 0.9261
     tran[0, 1] = 1.0 - 0.9261
@@ -71,7 +81,7 @@ def SS(data):
         tolk=1e-4
         tollab=1e-4
 
-        nq=40                                # Max number of iterations
+        nq=2                                # Max number of iterations
         q=0                                  # Counter for iterations
 
         k1=k0+10
@@ -341,6 +351,7 @@ def SS(data):
 print('Both sets of iterations completed')
 
 def plot_SS_K(kgen0,kgen1):
+    """(Average) Savings by age."""
     J = 66                        # life-span
     #JR = 46                       # age of retirement
     #tR = J - JR + 1               # length of retirement
@@ -354,6 +365,7 @@ def plot_SS_K(kgen0,kgen1):
     return plt.figure(1)
 
 def plot_SS_L(labgen0,labgen1):
+    """(Average) Labor (effective) supply by age."""
     #J = 66                        # life-span
     JR = 46                       # age of retirement
     #tR = J - JR + 1               # length of retirement
@@ -368,6 +380,7 @@ def plot_SS_L(labgen0,labgen1):
     return plt.figure(2)
 
 def plot_SS_E(earnings_0,earnings_1):
+    """(Average) Earnings before tax from labor by age."""
     #J = 66                        # life-span
     JR = 46                       # age of retirement
     #tR = J - JR + 1               # length of retirement
@@ -382,6 +395,7 @@ def plot_SS_E(earnings_0,earnings_1):
     return plt.figure(3)
 
 def plot_SS_C(cons_0,cons_1):
+    """(Average) Consumption by age."""
     J = 66                        # life-span
     #JR = 46                       # age of retirement
     #tR = J - JR + 1               # length of retirement
