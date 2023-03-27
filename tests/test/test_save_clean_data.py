@@ -1,11 +1,12 @@
 import os
 import pandas as pd
 import pytest
+from ss_us.config import BLD
 
 @pytest.fixture
 def output_file_path():
     """Returns the expected file path of the produced CSV file."""
-    return "BLD/python/age_efficiency/age_eff.csv"
+    return BLD/"python"/"age_efficiency"/"age_eff.csv"
 
 def test_output_file_path(output_file_path):
     """Tests that the produced CSV file is saved in the correct directory."""

@@ -19,7 +19,6 @@
 % \usepackage{pdf14} % Enable for Manuscriptcentral -- can't handle pdf 1.5
 % \usepackage{endfloat} % Enable to move tables / figures to the end. Useful for some
 % submissions.
-
 \usepackage[
     natbib=true,
     bibencoding=inputenc,
@@ -59,68 +58,73 @@
 
 \begin{document}
 
-\title{Social security US\thanks{LZ, Bonn University. Email: \href{mailto:s78lzecc@uni-bonn.de}{\nolinkurl{s78lzecc [at] uni-bonn [dot] de}}.}}
+\title{Social security US\thanks{Lorenzo Zecca, Bonn University. Email: \href{mailto:s78lzecc@uni-bonn.de}{\nolinkurl{s78lzecc [at] uni-bonn [dot] de}}.}}
 
 \author{Lorenzo Zecca}
 
 \date{
-    {\bf Preliminary -- please do not quote}
-    \\[1ex]
-    \today
+    31st March 2023
 }
 
 \maketitle
 
 
 \begin{abstract}
-    
+    This project replicates the study of Conesa and Krueger (1999): we consider a discrete time overlapping generations model, 
+    where the economy is populated by a continuum with given mass 
+    growing at a constant rate $n$ of ex-ante identical individuals.
+    We compare two steady states: 
+    one in which the government runs a social security system, financed 
+    through taxes on labor; and another one, where the there is no public 
+    pension system, and eranings from labor are not taxed. However, we will cover only 
+    the comparion between the two steady states, neglecting the transition dynamics analysis.
 \end{abstract}
 
 \clearpage
 
 
-\section{Introduction} % (fold)
-\label{sec:introduction}
+\section{Numerical results} % (fold)
+\begin{table}
+\input{../bld/python/results/table_results.tex}
+\end{table}
+\section{Aggregate variables' profile: Initial vs. Final Steady State}
 
-
-
-
-
-\begin{figure}[H]
+\begin{figure}[h]
 
     \centering
-    \includegraphics[width=0.85\textwidth]{}
+    \includegraphics[width=0.85\textwidth]{../bld/python/figures/steady_states/savings_by_age.png}
+    \caption{\emph{Python:} Savings by age. Larger in the final ss: without social security, agents have to accumulate more wealth.}
+    \label{fig:python-K}
+\end{figure}
 
-    \caption{\emph{Python:} Model predictions of the smoking probability over the
-        lifetime. Each colored line represents a case where marital status is fixed to one
-        of the values present in the data set.}
-    \label{fig:python-predictions}
+\begin{figure}
+    
+    \centering
+    \includegraphics[width=0.85\textwidth]{../bld/python/figures/steady_states/labor_by_age.png}
+    \caption{\emph{Python:} Effective labor supply by age.}
+    \label{fig:python-L}
+
+\end{figure}
+
+\begin{figure}
+
+    \centering
+    \includegraphics[width=0.85\textwidth]{../bld/python/figures/steady_states/earnings_by_age.png}
+    \caption{\emph{Python:} Earnings by age. Larger in the final ss: agents work more and at higher wages.}
+    \label{fig:python-E}
 
 \end{figure}
 
 
-\begin{table}[!h]
-    \input{../python/results/tables_results.tex}
-    \caption{\label{tab:python-summary}\emph{Python:} Estimation results of the
-        linear Logistic regression.}
-\end{table}
+\begin{figure}
 
+    \centering
+    \includegraphics[width=0.85\textwidth]{../bld/python/figures/steady_states/consumption_by_age.png}
+    \caption{\emph{Python:} Consumption by age.}
+    \label{fig:python-C}
 
+\end{figure}
 
-
-% section introduction (end)
-
-
-
-\setstretch{1}
 \printbibliography
-\setstretch{1.5}
-
-
-% \appendix
-
-% The chngctr package is needed for the following lines.
-% \counterwithin{table}{section}
-% \counterwithin{figure}{section}
 
 \end{document}

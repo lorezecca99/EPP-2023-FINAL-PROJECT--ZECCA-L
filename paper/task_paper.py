@@ -25,7 +25,8 @@ for document in documents:
         "produces": BLD.parent.resolve() / f"{document}.pdf",
     }
 
-    @pytask.mark.task(id=document, kwargs=kwargs)
+    @pytask.mark.task(id=document,kwargs=kwargs)
     def task_copy_to_root(depends_on, produces):
         """Copy a document to the root directory for easier retrieval."""
         shutil.copy(depends_on, produces)
+    # kwargs=kwargs

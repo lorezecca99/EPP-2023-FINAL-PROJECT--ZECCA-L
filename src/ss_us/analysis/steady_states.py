@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #Set up experiment
-def SS(data):
+def SS(data,iterations):
     """ The function, and the project as a whole, replicates the work 
     from Conesa and Krueger (1999) and assesses a social security reform.
     We consider a discrete time overlapping generations model, 
@@ -11,7 +11,8 @@ def SS(data):
     The function computes the two steady states: 
     one in which the government runs a social security system, financed 
     through taxes on labor; and another one, where the there is no public 
-    pension system, and eranings from labor are not taxed. """
+    pension system, and eranings from labor are not taxed. In this project, we will cover only 
+    the comparion between the two steady states, neglecting the transition dynamics analysis """
 
     def Reform(R):
         if  R== 0:
@@ -81,7 +82,7 @@ def SS(data):
         tolk=1e-4
         tollab=1e-4
 
-        nq=2                                # Max number of iterations
+        nq=iterations                                # Max number of iterations
         q=0                                  # Counter for iterations
 
         k1=k0+10
@@ -303,7 +304,7 @@ def SS(data):
             b_1=b
             labopt_1=labopt
             V0_1=np.mean(vW[:,0,0])
-    
+    #Computing (average) earnings by age
     earningsW_0 = np.zeros((N,nk,tW))
     earningsW_1 = np.zeros((N,nk,tW))
 
@@ -318,7 +319,7 @@ def SS(data):
 
     earnings_1 = np.mean(earningsW_1, 0) #earningsW_1 is a 2x200x45
     earnings_1 = np.mean(earnings_1, 0) #45x1, final ss
-
+    #Computing (average) consumption by age
     consgen_0=np.zeros((J))
     consgen_0[J-1]=(1+r0_0)*kgen0[J-1]+b_0*mass[J-1]
     consgen_1=np.zeros((J))
@@ -333,15 +334,25 @@ def SS(data):
     for j in range(J):
         consgen_0[j]=consgen_0[j]/mass[j]
         consgen_1[j]=consgen_1[j]/mass[j]
-
+    #Computing (average) savings by age, where kgen initially stands for "capital accumulated by each generation"
     for j in range(J):
         kgen0[j] = kgen0[j] / mass[j]
         kgen1[j] = kgen1[j] / mass[j]
-
+    #Computing (average) labor supply by age, where labgen initially stands for "labor supplied by each generation"
     for j in range(tW):
         labgen0[j] = labgen0[j] / mass[j]
         labgen1[j] = labgen1[j] / mass[j]
 
+    # Computing welfare effects of the reform
+    """Let us now study the pension system reform in terms of welfare effects for each generation. 
+        To do so, we use the consumption equivalent variation (CEV). Such an index measures 
+        how much (in percent) the consumption of a new-born individual has to be increased, in all future periods
+        (keeping leisure unchanged), in the old steady state so that his/her future utility equals 
+        that under the policy reform. For instance, if the CEV for an individual in the initial 
+        steady state economy is 1.0%, it means that he/she prefers an economy where the
+        policy is put into place and needs to be compensated with a rise in consumption by 1.0% in all future periods
+        with leisure constant at the initial steady-state itself."""
+    
     CEV=(V0_1/V0_0)**(1/(gamma*(1-sigma)))-1
 
     return [kgen0, kgen1, labgen0, labgen1,r0_0,

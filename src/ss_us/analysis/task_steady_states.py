@@ -21,7 +21,15 @@ def task_SS_python(depends_on, produces):
     """Compute the ss and save data for figures."""
     #data_info = read_yaml(depends_on["data_info"])
     data = np.loadtxt(depends_on["data"])
-    ss_results = SS(data)
+    iterations=2 
+
+    """In Matlab we usually need 10. 
+    In python, the results seem reasonable if iterations>30. It can be set also to, 
+    let us say, 2 just to prove that the code is running and all the results are stored. Of course, final results, 
+    and figures will be totally unreliable"""
+
+    ss_results = SS(data,iterations)
+    """Saving all the scalar as .txt and vectors as .npy"""
     np.save(BLD / "python" / "results"/"kgen0.npy", ss_results[0])
     np.save(BLD / "python" / "results"/"kgen1.npy", ss_results[1])
     np.save(BLD / "python" / "results"/"labgen0.npy", ss_results[2])

@@ -40,7 +40,7 @@ def predict_eff(data):
     data = data.pivot(index='age', columns='col', values='wage_fit_norm')
 
     """For the sake of simplicity, let us take the average between the two types of workers. 
-    Later on, we will once again, distinguish tho types of workers but following the approach 
+    Later on, we will, distinguish the two types of workers following the approach 
     adopted by Conesa and Krueger (1999)."""
     data['average_eff'] = (data[0] + data[1]) / 2
 

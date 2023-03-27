@@ -12,7 +12,7 @@ from ss_us.utilities import read_yaml
     {
         "scripts": ["clean_data.py"],
         "data_info": SRC / "data_management" / "data_info.yaml",
-        "data": SRC / "data"/ "dataset_14_18.csv"
+        "data": SRC / "data"/ "dataset.csv"
     },
 )
 @pytask.mark.produces(BLD / "python" / "data"/"cleaned_data.csv")
