@@ -9,7 +9,11 @@ from ss_us.config import BLD, SRC
 from ss_us.utilities import read_yaml
 
 
-#os.mkdir(BLD / "python" / "age_efficiency"/"figure") ##this is needed, otherwise, the folder is not created by "produces"
+figure_dir = BLD / "python" / "age_efficiency" / "figure"
+
+if not os.path.exists(figure_dir):
+    os.mkdir(figure_dir)             ##this is needed, otherwise, the folder is not created by "produces"
+    
 @pytask.mark.depends_on(
     {
         "scripts": ["predict.py"],
