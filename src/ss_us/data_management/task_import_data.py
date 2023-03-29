@@ -7,10 +7,6 @@ from ss_us.data_management.import_data import import_dataset
 import os
 #from ss_us.utilities import read_yaml
 
-data_folder = SRC / "data"
-
-if not os.path.exists(data_folder):
-    os.mkdir(data_folder)  
 @pytask.mark.produces(SRC / "data"/"dataset.csv")
 def task_import_dataset(produces):
     """Clean the data (Python version).
