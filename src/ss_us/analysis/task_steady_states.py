@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import pytask
 
 from ss_us.analysis.steady_states import SS
@@ -24,9 +23,9 @@ def task_SS_python(depends_on, produces):
     iterations=2 
 
     """In Matlab we usually need 10. 
-    In python, the results seem reasonable if iterations>30. It can be set also to, 
+    In python, the results seem reasonable if iterations>=30. It can be set also to, 
     let us say, 2 just to prove that the code is running and all the results are stored. Of course, final results, 
-    and figures will be totally unreliable"""
+    and figures will be totally unreliable for the analysis."""
 
     ss_results = SS(data,iterations)
     """Saving all the scalar as .txt and vectors as .npy"""
